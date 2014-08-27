@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>MovieDB</title>
+	<link rel="stylesheet" href="site.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="../libs/themoviedb-javascript-library-master/themoviedb.js"></script>
+	<script src="functions.js"></script>
+
+</head>
+	<body>
+		<div class="wrapper">
+			<div>
+			<h1>MovieDB</h1>
+				Search: <input id="searchValue" type="text" placeholder="Search for a movie">
+				<select id="searchBy">
+					<option value="people">People</option>
+					<option value="tvShow">TV Show</option>
+					<option value="movies">Movies</option>
+					<option value="keywords">Keywords</option>
+					<option value="lists">Lists</option>
+					<option value="collections">Collections</option>
+					<option value="companies">Companies</option>
+				</select>
+				<input id="search" type="submit" value="submit">
+			</div>
+			<div>
+				Page: 
+				<select id="page">
+					<option value="na">n/a</option>
+				</select>
+			</div>
+			<div>
+				<table id="results">
+					<thead>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<script>
+			$("#search").click( function() {
+				search();
+			});
+
+			$("#searchValue").keypress( function(e) {
+				if(e.keyCode == 13)
+					search();
+			});
+
+			$("#search").keypress( function(e) {
+				if(e.keyCode == 13)
+					search();
+			});
+
+			$("#searchBy").change( function() {
+				//clear selection when changing search area
+				errorCB()
+			});
+
+			$("#page").change( function() {
+				search()
+			});
+			
+			function search() {
+				switch(document.getElementById("searchBy").value) {
+					case "people":
+						searchPeople();
+						break;
+					case "tvShow":
+						searchTV();
+						break;
+					case "movies":
+						searchMovie();
+						break;
+					case "keywords":
+						searchKeywords();
+						break;
+					case "lists":
+						searchLists();
+						break;
+					case "collections":
+						searchCollections();
+						break;
+					case "companies":
+						searchCompanies();
+						break;
+					default:
+						console.log("default");
+				}
+		    }
+		</script>
+	</body>
+</html>
